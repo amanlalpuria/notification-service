@@ -1,0 +1,7 @@
+spring:
+    application:
+        name: notification
+
+firebase:
+    config:
+        path:classpath:firebase-service-account.json
