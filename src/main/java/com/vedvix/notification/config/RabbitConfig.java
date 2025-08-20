@@ -1,22 +1,28 @@
 package com.vedvix.notification.config;
 
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitConfig {
+/*
 
     @Value("${notification.queues.email}")
     private String emailQueue;
-
+*/
     @Value("${notification.queues.sms}")
     private String smsQueue;
-
+/*
     @Value("${notification.queues.push}")
     private String pushQueue;
 
+
+*/
     @Value("${notification.exchange}")
     private String exchangeName;
 
@@ -24,16 +30,17 @@ public class RabbitConfig {
     public DirectExchange notificationExchange() {
         return new DirectExchange(exchangeName);
     }
-
+    @Bean
+    public Queue smsNotificationQueue() {
+        return new Queue(smsQueue);
+    }
+/*
     @Bean
     public Queue emailNotificationQueue() {
         return new Queue(emailQueue);
     }
 
-    @Bean
-    public Queue smsNotificationQueue() {
-        return new Queue(smsQueue);
-    }
+
 
     @Bean
     public Queue pushNotificationQueue() {
@@ -47,6 +54,15 @@ public class RabbitConfig {
                 .with("notify.email");
     }
 
+
+
+    @Bean
+    public Binding bindPushQueue() {
+        return BindingBuilder.bind(pushNotificationQueue())
+                .to(notificationExchange())
+                .with("notify.push");
+    }*/
+
     @Bean
     public Binding bindSmsQueue() {
         return BindingBuilder.bind(smsNotificationQueue())
@@ -55,9 +71,14 @@ public class RabbitConfig {
     }
 
     @Bean
-    public Binding bindPushQueue() {
-        return BindingBuilder.bind(pushNotificationQueue())
-                .to(notificationExchange())
-                .with("notify.push");
+    public Jackson2JsonMessageConverter messageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
+
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        rabbitTemplate.setMessageConverter(messageConverter());
+        return rabbitTemplate;
     }
 }

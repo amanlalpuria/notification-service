@@ -10,6 +10,8 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "twilio")
 @Data
 public class TwilioConfig {
+
+
     private String accountSid;
     private String authToken;
     private String fromNumber;
@@ -18,4 +20,6 @@ public class TwilioConfig {
     public void init() {
         Twilio.init(accountSid, authToken);
     }
+
+
 }

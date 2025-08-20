@@ -19,8 +19,8 @@ public class NotificationServiceImpl implements NotificationService {
     @Override
     public void sendNotification(NotificationRequest request) {
         request.getChannels().forEach(channel -> {
-            String routingKey = "notification." + channel.name().toLowerCase();
-            rabbitTemplate.convertAndSend("notification-exchange", routingKey, request);
+            String routingKey = "notification_" + channel.name().toLowerCase();
+            rabbitTemplate.convertAndSend("", routingKey, request);
             log.info("Published to routingKey: {}, user: {}", routingKey, request.getUserId());
         });
     }

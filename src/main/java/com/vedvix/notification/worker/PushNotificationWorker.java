@@ -19,7 +19,7 @@ public class PushNotificationWorker implements NotificationWorker {
         log.info("Sending Push Notification to {} with template {}", request.getUserId(), request.getTemplateCode());
         // TODO: Integrate Firebase FCM here
     }
-
+/*
     @RabbitListener(queues = "${notification.queues.push}")
     public void listen(String message) {
         try {
@@ -29,4 +29,6 @@ public class PushNotificationWorker implements NotificationWorker {
             log.error("Failed to process push notification", e);
         }
     }
+
+ */
 }
