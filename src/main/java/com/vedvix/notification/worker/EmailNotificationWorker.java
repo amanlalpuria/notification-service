@@ -21,7 +21,7 @@ public class EmailNotificationWorker implements NotificationWorker {
 
         // TODO: Integrate AWS SES here
     }
-
+    /*
     @RabbitListener(queues = "${notification.queues.email}")
     public void listen(String message) {
         try {
@@ -31,4 +31,6 @@ public class EmailNotificationWorker implements NotificationWorker {
             log.error("Failed to process email notification", e);
         }
     }
+
+     */
 }
