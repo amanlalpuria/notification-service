@@ -4,8 +4,8 @@ spring:
     rabbitmq:
         host: localhost
         port: 5672
-        username: rabbitmq
-        password: rabbitmq
+        username: {$rabbitmq}
+        password: {$rabbitmq}
         listener:
             simple:
                 default-deserialization-trusted-packages: com.vedvix.notification.dto
@@ -16,7 +16,7 @@ firebase:
         path: classpath:firebase-service-account.json
 
 twilio:
-    accountSid: ACad4e055f6f209eb6d132d369645e7e08
+    accountSid: {$accountSid}
     authToken: 956b1b98a680cfd306e12c9510933c1c
     fromNumber: +18154280217
 
