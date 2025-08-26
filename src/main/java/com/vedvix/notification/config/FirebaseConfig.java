@@ -12,7 +12,7 @@ import java.io.IOException;
 
 @Configuration
 public class FirebaseConfig {
-
+/*
     @Value("${firebase.config.path}")
     private String firebaseConfigPath;
 
@@ -26,5 +26,5 @@ public class FirebaseConfig {
                 FirebaseApp.initializeApp(options);
             }
         }
-    }
+    }*/
 }
