@@ -1,0 +1,30 @@
+spring:
+    application:
+        name: notification
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: {$rabbitmq}
+        password: {$rabbitmq}
+        listener:
+            simple:
+                default-deserialization-trusted-packages: com.vedvix.notification.dto
+
+
+firebase:
+    config:
+        path: classpath:firebase-service-account.json
+
+twilio:
+    accountSid: {$accountSid}
+    authToken: {$authToken}
+    fromNumber: +18154280217
+
+
+notification:
+    queues:
+        sms: notification_sms
+        push: notification_push
+    exchange: notification_exchange
+
+

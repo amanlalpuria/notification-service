@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgis/postgis:17-3.4
+    container_name: notification_service_postgres_db
+    environment:
+      POSTGRES_USER: notification_service_rw_user
+      POSTGRES_PASSWORD: notification_service_rw_user
+      POSTGRES_DB: notification_service
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+#    networks:
+#      - backend
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "notification_service_rw_user"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: notification_service_rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+#    networks:
+#      - backend
+    healthcheck:
+      test: [ "CMD", "rabbitmq-diagnostics", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+
+volumes:
+  rabbitmq_data: {}
+  postgres_data: {}
+
