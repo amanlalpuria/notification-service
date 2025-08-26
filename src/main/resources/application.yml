@@ -17,13 +17,14 @@ firebase:
 
 twilio:
     accountSid: {$accountSid}
-    authToken: 956b1b98a680cfd306e12c9510933c1c
+    authToken: {$authToken}
     fromNumber: +18154280217
 
 
 notification:
     queues:
         sms: notification_sms
+        push: notification_push
     exchange: notification_exchange
 
 
