@@ -9,7 +9,14 @@ spring:
         listener:
             simple:
                 default-deserialization-trusted-packages: com.vedvix.notification.dto
-
+    datasource:
+        url: jdbc:postgresql://127.0.0.1:5432/notification_service
+        username: {$notification_service_rw_user}
+        password: {$notification_service_rw_user}
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: update
 
 firebase:
     config:
