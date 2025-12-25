@@ -1,11 +1,13 @@
 package com.vedvix.notification.dto;
 
 import lombok.Data;
+
+import java.io.Serializable;
 import java.util.Map;
 import java.util.List;
 
 @Data
-public class NotificationRequest {
+public class NotificationRequest implements Serializable {
     private String projectId;
     private String userId;
     private List<ChannelType> channels; // PUSH, EMAIL, SMS

@@ -1,7 +1,37 @@
 spring:
     application:
         name: notification
+    rabbitmq:
+        host: localhost
+        port: 5672
+        username: {$rabbitmq}
+        password: {$rabbitmq}
+        listener:
+            simple:
+                default-deserialization-trusted-packages: com.vedvix.notification.dto
+    datasource:
+        url: jdbc:postgresql://127.0.0.1:5432/notification_service
+        username: {$notification_service_rw_user}
+        password: {$notification_service_rw_user}
+        driver-class-name: org.postgresql.Driver
+    jpa:
+        hibernate:
+            ddl-auto: update
 
 firebase:
     config:
-        path:classpath:firebase-service-account.json
+        path: classpath:firebase-service-account.json
+
+twilio:
+    accountSid: {$accountSid}
+    authToken: {$authToken}
+    fromNumber: +18154280217
+
+
+notification:
+    queues:
+        sms: notification_sms
+        push: notification_push
+    exchange: notification_exchange
+
+

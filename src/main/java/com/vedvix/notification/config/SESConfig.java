@@ -10,7 +10,7 @@ import software.amazon.awssdk.services.ses.SesClient;
 
 @Configuration
 public class SESConfig {
-
+/*
     @Value("${aws.access-key}")
     private String accessKey;
 
@@ -31,4 +31,6 @@ public class SESConfig {
                 )
                 .build();
     }
+
+ */
 }
